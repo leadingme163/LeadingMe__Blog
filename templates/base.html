@@ -1,0 +1,141 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+<head>
+ <meta charset="utf-8">
+ <title>LeadingMe的博客</title>
+ <meta name=keyword" content="This is LeadingMe's an blog">
+ <link href="/static/css/buju.css" rel="stylesheet">
+ <link href="/static/css/index.css" rel="stylesheet">
+ {% block custom_css %}{% endblock %}   <!--自定义公用css块-->
+ <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+ <script type="text/javascript" src="/static/js/sliders.js"></script>
+ {% block custom_js %} {% endblock %}   <!--自定义公用js块-->
+</head>
+<body>
+  <div class="personal" >{{ PER_NAME.0 }}</div>
+  <p class="personal_introduce">{{ PER_DESC.0 }}</p>
+  <header>
+    <div class="logo f_l">
+	   <a href="/">
+	      <img src="/static/images/mylogo.png" style="border-radius: 10px">
+	   </a>
+	 </div>
+	 <div id="topnav" class="f_r">
+	     <ul>
+			  <a href="/notOpen/">{{nav_list.0.name}}</a>
+			  <a href="/" target="_blank">{{nav_list.1.name}}</a>
+			  <a href="/notOpen/">{{nav_list.2.name}}</a>
+			  <a href="/notOpen/">{{nav_list.3.name}}</a>
+			  <a href="/notOpen/ ">{{nav_list.4.name}}</a>
+		  </ul>
+	 </div>
+  </header>
+  <article>
+    <div class="l_box f_l">
+        {% block left_content %} {% endblock %}
+	</div>
+    <div class="r_box f_r">
+	   <div class="tit01">
+         <h3>关注我</h3>
+		  <div class="gzwm">
+		    <ul>
+			   <li><a class="weibo" href="https://weibo.com/u/7264092047/home?leftnav=1" target="_blank">微博</a></li>
+			   <li><a class="github" href="https://github.com/Embarrassing1" target="_blank">GitHub</a></li>
+			   <li><a class="mayun" href="https://gitee.com/LeadingMe" target="_blank">码云</a></li>
+			   <li><a class="wx" href="https://mail.qq.com/cgi-bin/frame_html?sid=Shp2b1VylcpybjFs&r=898bdb6916fbad7f903074789bd0139a" target="_blank">邮箱</a></li>
+			</ul>
+		  </div>
+       </div>
+	   <div class="tab" id="lp_right_select">
+	     <script>
+		     window.onload=function()
+			 {
+			     var oLi=document.getElementById("tb").getElementsByTagName("li");
+				 var oUl=document.getElementById("tb-main").getElementsByTagName("div");
+				 for(var i=0;i<oLi.length;i++)
+				 {
+				     oLi[i].index=i;
+					 oLi[i].onmouseover=function()
+					 {
+					    for(var n=0;n<oLi.length;n++)
+						    oLi[n].className="";
+							this.className="cur";
+						for(var n=0;n<oUl.length;n++)
+                            oUl[n].style.display="none";
+                            oUl[this.index].style.display="block";
+					 }
+				 }
+			 }
+		  </script>
+         <!--各类排行-->
+	     <div class="tab-top">
+		      <ul class="hd" id="tb">
+			       <li class="cur"><a href="/">点击排行</a></li>
+				   <li><a href="/">最新文章</a></li>
+				   <li><a href="/">站长推荐</a></li>
+			  </ul>
+		  </div>
+		  <div class="tab-main" id="tb-main">
+		      <div class="bd bd-news" style="display:block;"><ul>
+                   {% for click in click_list %}
+			       <li><a href="{% url 'blog_content' %}?article_id={{ click.id }}" target="_blank">{{ click.desc }}</a></li>
+                   {% endfor %}
+			  </ul></div>
+			   <div class="bd bd-news" ><ul>
+                   {% for publish in publish_list %}
+			       <li><a href="{% url 'blog_content' %}?article_id={{ publish.id }}" target="_blank">{{ publish.desc }}</a></li>
+                   {% endfor %}
+			  </ul></div>
+			   <div class="bd bd-news" ><ul>
+                   {% for recommend in recommend_list %}
+			       <li><a href="{% url 'blog_content' %}?article_id={{ recommend.id }}" target="_blank">{{ recommend.desc }}</a></li>
+                   {% endfor %}
+			  </ul></div>
+		  </div>
+	   </div>
+       <div class="archive">
+           <h3>文章归档</h3>
+            <ul>
+                {% for archive in archive_list %}
+                <li>
+                    <p><span class="tutime font_size_18"><a href='{% url 'archive' %}?year={{ archive | slice:':4' }}&month={{ archive | slice:'5:7' }}'>{{ archive }}</a></span></p>
+                </li>
+                {% endfor %}
+            </ul>
+       </div>
+	   <div class="cloud">
+	     <h3>标签云</h3>
+		  <ul>
+             {% for tag in tag_list %}
+		        <li><a href="{% url 'tagCloud' %}?tag_id={{ tag.id }}" >{{ tag.name }}</a></li>
+             {% endfor %}
+		  </ul>
+	   </div>
+	   <div class="tuwen">
+	     <h3>图文推荐</h3>
+		 <ul>
+           {% for imageText in imageText_list %}
+		   <li><a href="{% url 'blog_content' %}?article_id={{ imageText.id }}"><img src="{{ imageText.user.avatar.url }}"><b>{{ imageText.title }}</b></a>
+		      <p>
+			       <div class="tulanmu_text"><span class="tulanum"></span>{{ imageText.desc }}</div>
+				   <span class="tutime">{{ imageText.date_publish }}</span>
+			   </p>
+		   </li>
+           {% endfor %}
+		 </ul>
+	   </div>
+	   <div class="links">
+	     <h3><span><a href="/notOpen/">申请友情链接</a></span>友情链接</h3>
+		 <ul>
+			<li><a href="https://github.com/Embarrassing1">GitHub</a></li>
+			<li><a href="https://gitee.com/LeadingMe">码云</a></li>
+            <li><a href="https://weibo.com/u/7264092047/home?leftnav=1">微博</a></li>
+			<li><a href="https://docs.djangoproject.com/zh-hans/2.1/ref/contrib/admin/">Django</a></li>
+            <li><a href="http://www.baidu.com">百度</a></li>
+         </ul>
+	   </div>
+	 </div>
+  </article>
+</body>
+</html>

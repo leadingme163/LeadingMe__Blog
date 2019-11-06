@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/blogContent.css">
+    <script>
+        window.onload = function () {
+            var upBox = document.getElementsByClassName('upBox');
+            var count1 = document.getElementById('count1');
+            var count2 = document.getElementById('count2');
+            upBox[0].onmouseover = function() {
+                count1.innerHTML = '+1';
+                count1.className += ' addone';
+            };
+            upBox[0].onmouseout = function() {
+                count1.innerHTML = '5';
+                count1.className = 'count';
+            };
+            upBox[1].onmouseover = function() {
+                count2.innerHTML = '+1';
+                count2.className += ' addone';
+            };
+            upBox[1].onmouseout = function() {
+                count2.innerHTML = '0';
+                count2.className = 'count';
+            };
+            {% comment %}for(var i=0; i<{{comment_list.count}};i++ ){
+                var relay = document.getElementsByClassName('cite_');
+                var relay_box = document.getElementsByClassName('relay_box_');
+                relay.onclick = function () {
+                    if(relay_box[i].style.display === "none"){
+                        relay_box[i].style.display = "block";
+                        relay[i].innerHTML = '取消回复';
+                    }else {
+                        relay_box[i].style.display = "none";
+                        relay[i].innerHTML = '回复';
+                    }
+                };
+            }{% endcomment %}
+            var tip = document.getElementById("tip");
+            var tip_text  = document.getElementById('tip_text');
+            tip.onmouseover = function () {
+                tip_text.style.visibility = 'visible';
+            };
+            tip.onmouseout = function () {
+                tip_text.style.visibility = 'hidden';
+            };
+
+            //var blog_text = document.getElementById("blog_text");
+            //blogText =  blog_text.innerText;
+            //blog_text.innerHTML = blogText;     <!--富文本编辑器kindEditor将富文本存入数据库,从而转为字符创，用js将innerHTML替换innerText-->
+        }
+    </script>
+</head>
+<body>
+    <div class="headarea">
+        <h1 id="blogname" class="blogtitle">
+            <a href="/">
+                <img src="../static/images/Leadingme.png" alt="Leadingme_photo">
+                <span class="blogname">LeadingMe的博客</span>
+            </a>
+        </h1>
+    </div>
+    <div class="blogContent">
+        <!--正文-->
+        <div class="SG_connHead">
+            <span comp_title="正文" class="title">正文</span>
+        </div>
+        <div class="maintext">
+            <h2 class="text_title" >{{ article.title }}</h2>
+            <span class="date">({{ article.date_publish }})</span>
+            <ul>
+                <li class="blog_author">
+                    <span class="SG_txtb">作者:</span>
+                    <span class="SG_value">{{article.user.username}}</span>
+                </li>
+                <li class="blog_tag">
+                    <span class="SG_txtb">标签:</span>
+                    <h3 class="SG_value">{{ article.tag.name }}</h3>
+                </li>
+             </ul>
+            {% autoescape off %}
+            <div class="blog_text" id="blog_text">
+                {{ article.content }}
+            </div>
+            {% endautoescape %}
+            <div class="zan">
+                <div class="upBox" style="cursor: pointer;" >
+	            	<p class="count" id="count1">5</p>
+	                <p class="link">
+                        <img width="15" height="15" src="" class="SG_icon SG_icon34"/>喜欢
+                    </p>
+                </div>
+                <div class="upBox upBox_add" id="upBox" style="cursor: pointer;" >
+	            	<p class="count" id="count2">1</p>
+	                <p class="link" id="count2">
+                        <img width="15" height="15" src="" class="SG_icon SG_icon35"/>推荐
+                    </p>
+                </div>
+            </div>
+            <div class="allCommTit">
+				<div class="SG_floatL">
+				    <strong>评论</strong>
+				    <span id="commAd_1" style="display: inline-block;">
+				        <span style="margin-left:15px; width:220px; display:inline-block;">博主提示：请文明评论！</span>
+				    </span>
+				</div>
+			</div>
+            <div class="comment_area">
+                {% for comment in comment_list %}
+                <div class="SG_revert_Cont">
+                    <div>
+                        <p class="comment_user">@{{ comment.user }}</p>
+                        <p class="comment_text">{{ comment.content }}<p>
+                        <div class="comment_time">
+                            <em>{{ comment.date_publish }}</em>
+                        </div>
+                    </div>
+                     {% if comment.children_comment != None %}
+                     {% for children_comment in comment.children_comment %}
+                        <div class="ping">
+                            <p class="comment_user" style="margin-left: 45px;">@{{ children_comment.user }}</p>
+                            <p class="comment_text" style="margin-left: 45px; height: auto;">{{ children_comment.content }}</p>
+                            <div class="comment_time" style="margin-left: 45px;">
+                                <em>{{ children_comment.date_publish }}</em>
+                            </div>
+                        </div>
+                     {% endfor %}
+                      {% endif %}
+                    <div class="comment_time">
+                        <cite class="cite_">回复</cite>
+                    </div>
+
+                </div>
+                <!--回复框-->
+                <div class="contains" id="relay_box_">
+                    <div class="relay">
+                        <div class="comment_tip">请输入您的回复</div>
+                        <form action="/relay/" method="post">
+                            {% csrf_token %}
+                            <textarea name="comment"></textarea>
+                            <input type="text" name="article_id" value="{{ article.id }}" style="display:none"/>
+                            <input type="text" name="comment_id" value="{{ comment.id }}" style="display:none"/>
+                            <input type="submit" class="submit" name="submit" value="回复" />
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="write_comment">
+                <div class="allCommTit">
+				    <strong>发评论</strong>
+			    </div>
+                <!--发评论框-->
+                <div class="contains" id="relay_box" style="display: block">
+                    <div class="relay">
+                        <div class="comment_tip">请输入您的评论</div>
+                        <form action="/report/" method="post">
+                            {% csrf_token %}
+                            <textarea name="comment"></textarea>
+                            <input type="text" name="article_id" value="{{ article.id }}" style="display:none"/>
+                            <input type="submit" class="submit" name="submit" value="发表" />
+                        </form>
+                    </div>
+                </div>
+                <form action="/login/" method="post" id="commentlogin" class="commentlogin contains" style="display: block;">
+                    {% csrf_token %}
+                    <span>用户名：</span>
+                    <input type="text" style="width: 115px;" id="login_name" name="username" tabindex="2" required value="{{ username | default:'' }}">
+                    <span>密码：</span>
+                    <input type="password" style="width: 115px;" id="login_pass" name="password" tabindex="3" required value="{{ password | default:'' }}">
+                    <input type="text" name="article_id" value="{{ article.id }}" style="display:none">
+                    <button type="submit" class="login">登录</button>
+                    <a href="/out/"><button type="button" class="login out">退出</button></a>
+                    <div class="register">
+                        <a href="/register/?article={{ article.id }}">注册</a>
+                        <a id="tip" href="#">找回密码</a>
+                        <span style="color: red; visibility:hidden" id="tip_text">温馨提示: 该功能暂未开放</span>
+                    </div>
+                    <p style="margin-top: 30px; color: red; font-size:18px;">{{ tip | default:'未登录状态！' }}</p>
+                </form>
+                <p class="SG_txtc">以上网友发言只代表其个人观点，不代表网站所有者的观点或立场。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

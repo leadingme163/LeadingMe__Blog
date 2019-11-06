@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>敬请期待</title>
+    <style>
+        body{
+            background-image: url("../static/images/bg.jpg");
+            background-repeat:no-repeat ;
+            background-size:100%;
+            background-attachment: fixed;
+        }
+        .notOpen{
+            font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+            width: 450px;
+            height: 300px;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background-image: linear-gradient(#acc1b8eb, #0c040442);
+            border:5px solid #a1a1a1;
+            border-radius:30px;
+            text-align: center;
+        }
+        .wait{
+                font-family:inherit;
+                font-size: 43px;
+                padding-left: 20px;
+                margin-top: 75px;
+
+        }
+        a{
+            text-decoration: none;
+            display: block;
+            width: 100px;
+            height: 30px;
+            background-image: linear-gradient(#fff0f50a, #a9a9a9d6);
+            color: #fff2f2;
+            border-radius:15px;
+            margin-left: 170px;
+            margin-top: 60px;
+            line-height: 30px;
+        }
+        /*鼠标划过(停留)的链接*/
+        a:hover{
+            text-decoration: blink;
+        }
+        a:visited {
+            text-decoration: none;
+        }
+        /* 正在点击的链接*/
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="notOpen">
+        <p class="wait">暂未开放，敬请期待！</p>
+        <a href="javascript:history.back(-1)" class="back">返回首页</a>
+    </div>
+</body>
+</html>

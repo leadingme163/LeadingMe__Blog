@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block left_content %}
+     <!--广告板块-->
+     {% include 'ad.html' %}
+     <!--文章发表板块-->
+     <div class="topnews">
+	   <h2>
+	    {{ request.GET.year }}/{{ request.GET.month }}归档文章
+	   </h2>
+          {% for article in article_list %}
+		  <div class="blogs">
+		      <figure>
+			     <img style="width:80%" src="{{ article.user.avatar.url }}"/>
+			   </figure>
+			   <ul>
+			     <h3><a href="{% url 'blog_content' %}?article_id={{ article.id }}">{{ article.title }}</a></h3>
+                 <p>{{ article.desc }}</p>
+			     <p class="autor">
+				    <span class="lm f_l">
+					    <a href="/">{{ article.tag.name }}</a>&nbsp;
+					</span>
+					 <span class="dtime f_l">{{ article.date_publish }}</span>
+					 <span class="viewnum f_r">
+					    浏览（<a href="/">{{ article.click_count}}</a>）</span>
+					 <span class="pingl f_r">
+					    评论（<a href="/">{{ article.comment_set.all.count }}</a>）
+                     </span>
+				  </p>
+			   </ul>
+	       </div>
+           {% endfor %}
+     </div>
+     {% include 'pagination.html' %}
+{% endblock %}

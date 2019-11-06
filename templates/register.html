@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <style>
+        body{
+            background-image: url("../static/images/bg.jpg");
+            background-repeat:no-repeat ;
+            background-size:100%;
+            background-attachment: fixed;
+        }
+        .explain{
+            text-align: center;
+            font-size: 18px;
+            color: #0000007a;
+        }
+        .userinfo{
+            background-image: linear-gradient(#acc1b8eb, #0c040442);
+            width: 450px;
+            height: 250px;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        .input-wrapper{
+            position: absolute;
+            top: 70px;
+            left: 93px;
+            color: #0000007a;
+        }
+        .input-wrapper input{
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+        .border{
+            top: 115px;
+            left: 94px;
+        }
+        .fix{
+            top: 160px;
+            left: 90px;
+        }
+        .submit{
+            position: absolute;
+            left: 375px;
+            top: 187px;
+            cursor: pointer;
+        }
+    </style>
+   <!--<script>
+        window.onload = function () {
+            function test() {
+                var password = document.getElementById('password').value;
+                var ispassword = document.getElementById('ispassword').value;
+                var submit = document.getElementById('submit');
+                console.log(password);
+                console.log(ispassword);
+                if((password.value()) == (ispassword.value())){
+                    submit.style.display = 'block';
+                }
+            }
+        }
+    </script>-->
+</head>
+<body>
+    <div>
+        <form action="/doRegister/" method="post" id="userinfo" class="userinfo">
+            {% csrf_token %}
+            <p class="explain">用户注册</p>
+            <span class="input-wrapper">用户名:&nbsp;&nbsp;&nbsp;<input type="text" name="username" id="username" placeholder="3-11位字母或数字组合" required></span>
+            <span class=" border input-wrapper">密码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="password"  id="password" placeholder="密码" required></span>
+            <span class=" border input-wrapper fix">确认密码:<input type="password" name="password"  id="ispassword" placeholder="确认密码" required></span>
+            <input style="display: none" type="text" name="article" value="{{ article }}">
+            <button type="submit" class="submit" id="submit">注册</button>
+        </form>
+    </div>
+</body>
+</html>

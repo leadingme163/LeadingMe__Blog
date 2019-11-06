@@ -1,0 +1,54 @@
+<!--广告板块-->
+    <div class="banner">
+	    <div id="slide-holder">
+		   <div id="slide-runner">
+		     <a href="notAd/">  <!--target="_blank"-->
+			     <img id="slide-img-1" src="{{ ad_list.0.image_url.url }}" alt style>
+			  </a>
+			  <a href="notAd/">
+			     <img id="slide-img-2" src="{{ ad_list.1.image_url.url }}" alt style>
+			  </a>
+			  <a href="notAd/">
+			     <img id="slide-img-3" src="{{ ad_list.2.image_url.url }}" alt style>
+			  </a>
+			  <a href="notAd/">
+			     <img id="slide-img-4" src="{{ ad_list.3.image_url.url }}" alt style>
+			  </a>
+			  <div id="slide-controls" style="display:block;">
+			    <p id="slide-client" class="text">
+				    <strong></strong>
+					 <span></span>
+				 </p>
+              <p id="slide-desc" class="text"></p>
+              <p id="slide-nav"></p>
+			  </div>
+		   </div>
+        </div>
+    </div>
+	  <script>
+	     if(!window.slider){
+		     var slider={};
+		 }
+		 slider.data=[
+		 {
+		     "id":"slide-img-1", //与slide-runner中的img标签id对应
+			 "client":"{{ ad_list.0.title }}",
+			 "desc":"{{ ad_list.0.description }}"     //这里描述图片内容
+		 },
+		 {
+		     "id":"slide-img-2",
+			 "client":"{{ ad_list.1.title }}",
+			 "desc":"{{ ad_list.1.description }}"
+		 },
+		 {
+		     "id":"slide-img-3",
+			 "client":"{{ ad_list.2.title }}",
+			 "desc":"{{ ad_list.2.description }}"
+		 },
+		 {
+		     "id":"slide-img-4",
+			 "client":"{{ ad_list.3.title }}",
+			 "desc":"{{ ad_list.3.description }}"
+		 }
+		 ];
+	   </script>

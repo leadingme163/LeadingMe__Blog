@@ -27,7 +27,7 @@ def global_settings(request):
     # 推荐文章排行(按发布日期)
     recommend_list = Article.objects.all().filter(is_recommend=True).order_by('-date_publish')[:6]
     # 图文推荐排行(按点赞量)
-    imageText_list = Article.objects.all().filter(is_recommend=True).order_by('-click_count')[:3]
+    imageText_list = Article.objects.all().filter(is_recommend=True).order_by('-date_publish')[:3]
     # 标题导航分类
     nav_list = Catagory.objects.all()[:5]
     # 广告推荐

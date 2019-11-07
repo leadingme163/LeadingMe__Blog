@@ -116,7 +116,7 @@
 	     <h3>图文推荐</h3>
 		 <ul>
            {% for imageText in imageText_list %}
-		   <li><a href="{% url 'blog_content' %}?article_id={{ imageText.id }}"><img src="{{ imageText.user.avatar.url }}"><b>{{ imageText.title }}</b></a>
+		   <li><a href="{% url 'blog_content' %}?article_id={{ imageText.id }}"><img style="width: 70px; height: 70px;" src="{{ imageText.user.avatar.url }}"><b>{{ imageText.title }}</b></a>
 		      <p>
 			       <div class="tulanmu_text"><span class="tulanum"></span>{{ imageText.desc }}</div>
 				   <span class="tutime">{{ imageText.date_publish }}</span>

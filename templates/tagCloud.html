@@ -11,7 +11,7 @@
           {% for article in article_list %}
 		  <div class="blogs">
 		      <figure>
-			     <img style="width:80%" src="{{ article.user.avatar.url }}"/>
+			     <img style="width:134px; height: 134px" src="{{ article.user.avatar.url }}"/>
 			   </figure>
 			   <ul>
 			     <h3><a href="{% url 'blog_content' %}?article_id={{ article.id }}">{{ article.title }}</a></h3>

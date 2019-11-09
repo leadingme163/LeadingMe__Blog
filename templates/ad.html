@@ -2,16 +2,16 @@
     <div class="banner">
 	    <div id="slide-holder">
 		   <div id="slide-runner">
-		     <a href="/notAd/">  <!--target="_blank"-->
+		     <a href="{% if ad_list.0.callback_url %}{{ ad_list.0.callback_url}}{% else %}{% url 'notAd' %}{% endif %}">  <!--target="_blank"-->
 			     <img id="slide-img-1" src="{{ ad_list.0.image_url.url }}" alt style>
 			  </a>
-			  <a href="/notAd/">
+			  <a href="{% if ad_list.1.callback_url %}{{ ad_list.1.callback_url}}{% else %}{% url 'notAd' %}{% endif %}">
 			     <img id="slide-img-2" src="{{ ad_list.1.image_url.url }}" alt style>
 			  </a>
-			  <a href="/notAd/">
+			  <a href="{% if ad_list.2.callback_url %}{{ ad_list.2.callback_url}}{% else %}{% url 'notAd' %}{% endif %}">
 			     <img id="slide-img-3" src="{{ ad_list.2.image_url.url }}" alt style>
 			  </a>
-			  <a href="/notAd/">
+			  <a href="{% if ad_list.3.callback_url %}{{ ad_list.3.callback_url}}{% else %}{% url 'notAd' %}{% endif %}">
 			     <img id="slide-img-4" src="{{ ad_list.3.image_url.url }}" alt style>
 			  </a>
 			  <div id="slide-controls" style="display:block;">

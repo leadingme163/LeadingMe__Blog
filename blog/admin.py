@@ -39,12 +39,9 @@ class Adadmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'description', 'image_url', 'callback_url', 'date_publish', 'index']
 
 
-class MyAdminSite(admin.AdminSite):
-    site_header = 'Leadingme的个人博客'  # 此处设置页面显示标题
-    site_title = '博客管理'  # 此处设置页面头部标题
+admin.site.site_header = 'Leadingme的个人博客'  # 此处设置页面显示标题
+admin.site.site_title = '博客管理'  # 此处设置页面头部标题
 
-
-admin.site = MyAdminSite(name='management')
 admin.site.register(User, UserAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Catagory, CatagoryAdmin)

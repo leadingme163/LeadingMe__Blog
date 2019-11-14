@@ -40,7 +40,7 @@ class Adadmin(admin.ModelAdmin):
 
 
 admin.site.site_header = 'Leadingme的个人博客'  # 此处设置页面显示标题
-admin.site.site_title = '博客管理'  # 此处设置页面头部标题
+admin.site.site_title = 'Leadingme'  # 此处设置页面头部标题
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Tag, TagAdmin)

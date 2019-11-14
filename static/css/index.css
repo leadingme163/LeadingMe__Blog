@@ -243,3 +243,10 @@ overflow:visible;
 .font_size_18 {
 	font-size: 18px;
 }
+
+.keyText{
+	display: block;
+	height: 0;
+	width: 0;
+	overflow: hidden;
+}

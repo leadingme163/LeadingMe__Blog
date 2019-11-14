@@ -3,17 +3,27 @@
 <html>
 <head>
  <meta charset="utf-8">
- <title>LeadingMe的博客</title>
- <meta name=”description” content='这是一个用于学习交流、分享心情及计算机技术交流的个人博客!'>
- <meta name=keyword" content="个人博客、学习交流、Leagingme博客、心情分享、Django学习、python编程">
+ <title>LeadingMe的博客——一个关注技术交流和趣事分享的个人博客网站</title>
+ <meta name=”description” content='这是一个用于学习交流、分享心情、生活趣事及计算机技术交流的个人博客!'>
+ <meta name=keyword" content="个人博客、学习交流、Leagingme博客、心情分享、Django学习、python编程、前端学习笔记">
  <link href="/static/css/buju.css" rel="stylesheet">
  <link href="/static/css/index.css" rel="stylesheet">
  {% block custom_css %}{% endblock %}   <!--自定义公用css块-->
  <script type="text/javascript" src="/static/js/jquery.min.js"></script>
  <script type="text/javascript" src="/static/js/sliders.js"></script>
  {% block custom_js %} {% endblock %}   <!--自定义公用js块-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?d56db1eaa129b837dbb8abde108fd17c";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>        <!--网站监测-->
 </head>
 <body>
+  <h1 class="keyText">———这是一个用于适合小白的前后端学习笔记分享(如css、js、jquery、Ajax、python、Django...)、分享心情、生活趣事及计算机技术交流的个人博客!</h1>
   <div class="personal" >{{ PER_NAME.0 }}</div>
   <p class="personal_introduce">{{ PER_DESC.0 }}</p>
   <header>
